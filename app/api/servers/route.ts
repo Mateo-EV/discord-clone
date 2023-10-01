@@ -1,20 +1,9 @@
 import { prisma } from "@/lib/db"
 import { getServerAuthSession } from "@/lib/getServerAuthSession"
+import { createServerSchema } from "@/schema"
 import { ImageableType, MemberRole } from "@prisma/client"
 import { randomUUID } from "crypto"
 import { NextResponse } from "next/server"
-import { z } from "zod"
-
-export const createServerSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required"
-  }),
-  image: z.string().min(1, {
-    message: "Server image is required"
-  })
-})
-
-export type ResponseServerPost = { id: string }
 
 export async function POST(req: Request) {
   try {

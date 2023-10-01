@@ -3,7 +3,7 @@
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
-import { ResponseServerPost, createServerSchema } from "@/app/api/servers/route"
+import { createServerSchema } from "@/schema"
 import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/useModalStore"
 import axios from "axios"
@@ -57,10 +57,7 @@ export const EditServerModal = () => {
   const isLoading = form.formState.isSubmitting
   const onSubmit: SubmitHandler<createServerSchemaType> = async values => {
     try {
-      const { data: serverUpdated } = await axios.patch<ResponseServerPost>(
-        `/api/servers/${server?.id}`,
-        values
-      )
+      await axios.patch(`/api/servers/${server?.id}`, values)
       onClose()
       router.refresh()
     } catch (error) {

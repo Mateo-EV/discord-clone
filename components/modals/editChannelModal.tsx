@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/select"
 
 import { ChannelType } from "@prisma/client"
-import { editChannelSchema } from "@/app/api/channels/[channelId]/route"
+import { editChannelSchema } from "@/schema"
 
 type editChannelSchemaType = z.infer<typeof editChannelSchema>
 

@@ -1,20 +1,8 @@
 import { prisma } from "@/lib/db"
 import { getServerAuthSession } from "@/lib/getServerAuthSession"
-import { ChannelType, MemberRole } from "@prisma/client"
+import { editChannelSchema } from "@/schema"
+import { MemberRole } from "@prisma/client"
 import { NextResponse } from "next/server"
-import { z } from "zod"
-
-export const editChannelSchema = z.object({
-  name: z
-    .string()
-    .min(1, {
-      message: "Channel name is required"
-    })
-    .refine(name => name !== "general", {
-      message: "Channel name cannot be 'general'"
-    }),
-  type: z.nativeEnum(ChannelType)
-})
 
 export async function PATCH(
   req: Request,

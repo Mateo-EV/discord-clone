@@ -33,7 +33,7 @@ import {
   SelectValue
 } from "@/components/ui/select"
 import { ChannelType } from "@prisma/client"
-import { createChannelSchema } from "@/app/api/channels/route"
+import { createChannelSchema } from "@/schema"
 import { useEffect } from "react"
 
 type createChannelSchemaType = z.infer<typeof createChannelSchema>

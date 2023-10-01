@@ -4,7 +4,7 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { useEffect, useState } from "react"
-import { ResponseServerPost, createServerSchema } from "@/app/api/servers/route"
+import { createServerSchema } from "@/schema"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 
@@ -49,10 +49,7 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting
   const onSubmit: SubmitHandler<createServerSchemaType> = async values => {
     try {
-      const { data: server } = await axios.post<ResponseServerPost>(
-        "/api/servers",
-        values
-      )
+      const { data: server } = await axios.post("/api/servers", values)
       router.push(`/servers/${server.id}`)
     } catch (error) {
       console.log(error)

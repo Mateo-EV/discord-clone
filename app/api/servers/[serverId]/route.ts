@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db"
 import { getServerAuthSession } from "@/lib/getServerAuthSession"
+import { createServerSchema } from "@/schema"
 import { NextResponse } from "next/server"
-import { createServerSchema } from "../route"
 import { utapi } from "uploadthing/server"
 
 export async function PATCH(

@@ -1,21 +1,9 @@
 import { prisma } from "@/lib/db"
 import { getServerAuthSession } from "@/lib/getServerAuthSession"
-import { ChannelType, MemberRole } from "@prisma/client"
+import { createChannelSchema } from "@/schema"
+import { MemberRole } from "@prisma/client"
 import { NextResponse } from "next/server"
 import { URL } from "url"
-import { z } from "zod"
-
-export const createChannelSchema = z.object({
-  name: z
-    .string()
-    .min(1, {
-      message: "Channel name is required"
-    })
-    .refine(name => name !== "general", {
-      message: "Channel name cannot be 'general'"
-    }),
-  type: z.nativeEnum(ChannelType)
-})
 
 export async function POST(req: Request) {
   try {
